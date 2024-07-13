@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Geolocation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Location</h1>
+    <p id="status">Getting location...</p>
+    <p id="location"></p>
+
+    <script>
+        function success(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const locationElement = document.getElementById('location');
+            locationElement.textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
+        }
+
+        function error() {
+            const status = document.getElementById('status');
+            status.textContent = 'Unable to retrieve your location';
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            const status = document.getElementById('status');
+            status.textContent = 'Geolocation is not supported by your browser';
+        }
+    </script>
+</body>
+</html>
